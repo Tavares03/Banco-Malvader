@@ -1,0 +1,7 @@
+flask
+pymysql
+flask-login
+flask-wtf
+flask-bcrypt
+openpyxl
+weasyprint
