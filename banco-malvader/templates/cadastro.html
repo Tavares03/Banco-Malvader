@@ -1,26 +1,33 @@
 {% extends "base.html" %}
-
-{% block title %} Login {% endblock %}
+{% block title %} Cadastro {% endblock %}
 
 {% block content %}
-  <h1>Login</h1>
-    <form action="/autenticar" method="POST">
+  <h1>Cadastro</h1>
+    <form action="/cadastrar" method="POST">
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username" name="username" required>
         </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        
         <div class="mb-3">
             <label for="cpf" class="form-label">CPF</label>
             <input type="text" class="form-control" id="cpf" name="cpf" required>
         </div>
+
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
     <br>
-    <form action="/cadastro" method="GET">
-    <p>Caso nao tenha login, cadastre-se aqui: <button type="submit" class="btn btn-secondary">Cadastrar</button></p>
+    <form action="/login" method="GET">
+    <p>Ja possui login? Faça login aqui: <button type="submit" class="btn btn-secondary">Login</button></p>
     </form>
 {% endblock %}
