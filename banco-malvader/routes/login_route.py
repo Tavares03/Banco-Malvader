@@ -8,9 +8,9 @@ def login():
 
 @login_route.route('/autenticar', methods=['POST'])
 def autenticar():
-    nome = request.form['nome']
-    cpf = request.form['cpf']
-    senha = request.form['senha']
+    nome = request.form.get("nome", "").strip()
+    cpf = request.form.get("cpf", "").strip()
+    senha = request.form.get("senha", "").strip()
 
 @login_route.route('/cadastro')
 def cadastro():
@@ -18,8 +18,8 @@ def cadastro():
 
 @login_route.route('/cadastrar', methods=['POST'])
 def cadastrar():
-    nome = request.form['nome']
-    email = request.form['email']
-    cpf = request.form['cpf']
-    senha = request.form['senha']
+    nome = request.form.get("nome", "").strip()
+    email = request.form.get("email", "").strip()
+    cpf = request.form.get("cpf", "").strip()
+    senha = request.form.get("senha", "").strip()
     return render_template('login.html')
