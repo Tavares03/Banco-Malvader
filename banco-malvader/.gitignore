@@ -6,6 +6,7 @@ venv/
 
 #pycache
 __pycache__/
+*.pyc
 
 #Editor
 .vscode/
