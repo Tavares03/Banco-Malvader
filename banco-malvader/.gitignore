@@ -1,0 +1,12 @@
+#Ambiente virtual
+venv/
+
+#variaveis secretas
+.env
+
+#pycache
+__pycache__/
+
+#Editor
+.vscode/
+.idea/
