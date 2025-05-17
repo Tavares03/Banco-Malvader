@@ -16,6 +16,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  const form = document.querySelector("form");
+    form.addEventListener("submit", function (e) {
+      const senha = document.getElementById("senha").value;
+      const confirmar = document.getElementById("confirmar_senha").value;
+
+      if (senha !== confirmar) {
+        e.preventDefault();  // impede o envio do formulário
+        alert("As senhas não coincidem!");
+      }
+    });
+
 });
 
 

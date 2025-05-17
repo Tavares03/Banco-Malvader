@@ -25,4 +25,4 @@ def autenticar_usuario(cpf, senha):
             cursor.execute(sql, (cpf, senha_hash))
             return cursor.fetchone()
     finally:
-        conexao.close()
+        conexao.close() 
