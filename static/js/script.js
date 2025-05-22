@@ -16,14 +16,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  const form = document.querySelector("form");
-    form.addEventListener("submit", function (e) {
+    const formSenha = document.querySelector("form");
+    formSenha.addEventListener("submit", function (e) {
       const senha = document.getElementById("senha").value;
       const confirmar = document.getElementById("confirmar_senha").value;
 
+      const senhaForte = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
       if (senha !== confirmar) {
-        e.preventDefault();  // impede o envio do formulário
-        alert("As senhas não coincidem!");
+        e.preventDefault();
+        alert("As senhas não coincidem.");
+        return;
+      }
+
+      if (!senhaForte.test(senha)) {
+        e.preventDefault();
+        alert("A senha deve ter no mínimo 8 caracteres, com letras maiúsculas, minúsculas, números e símbolos.");
       }
     });
 
