@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, session
-from dao.usuario_dao import cadastrar_usuario, autenticar_usuario
+from dao.usuario_dao import cadastrar_usuario, autenticar_usuario, gerar_otp_usuario, validar_otp
 from dao.cliente_dao import cadastrar_cliente
 from dao.endereco_dao import cadastrar_endereco
 import re
@@ -14,7 +14,6 @@ def login():
 def autenticar():
     cpf = re.sub(r"\D", "", request.form.get("cpf", "").strip())
     senha = request.form.get("senha", "").strip()
-
     usuario = autenticar_usuario(cpf, senha)
 
     if usuario:
@@ -22,10 +21,10 @@ def autenticar():
         session["tipo_usuario"] = usuario["tipo_usuario"]
         session["nome"] = usuario["nome"]
 
-        if usuario["tipo_usuario"] == "CLIENTE":
-            return redirect("/cliente")
-        else:
-            return redirect("/funcionario")
+        otp = gerar_otp_usuario(usuario["id_usuario"])
+        session["otp_gerado"] = otp
+
+        return redirect("/verificar_otp")
     else:
         return "CPF ou senha inválidos"
 
@@ -71,3 +70,21 @@ def salvar_cadastro():
         pass
 
     return redirect("/")
+
+@login_route.route('/verificar_otp', methods=['GET', 'POST'])
+def verificar_otp():
+    if request.method == "POST":
+        otp_digitado = request.form.get("otp")
+        id_usuario = session.get("usuario_id")
+
+        if validar_otp(id_usuario, otp_digitado):
+            tipo = session.get("tipo_usuario")
+            if tipo == "CLIENTE":
+                return redirect("/cliente")
+            else:
+                return redirect("/funcionario")
+        else:
+            return "OTP inválido ou expirado"
+
+    otp = session.get("otp_gerado")
+    return render_template("verificar_otp.html", otp=otp)
