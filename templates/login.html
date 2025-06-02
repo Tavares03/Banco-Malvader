@@ -2,8 +2,12 @@
 
 {% block title %} Login {% endblock %}
 
+{% block body_class %}bg-dark login-bg{% endblock %}
+
 {% block content %}
-  <h1>Login</h1>
+<h1 class="titulo">Bem-vindo ao Bando Malveder</h1>
+<div class="login-container">
+    <h2>Login</h2>
     <form action="/autenticar" method="POST">
         <div class="mb-3">
             <label for="cpf" class="form-label">CPF</label>
@@ -19,4 +23,5 @@
     <form action="/cadastro" method="GET">
     <p>Caso nao tenha login, cadastre-se aqui: <button type="submit" class="btn btn-secondary">Cadastrar</button></p>
     </form>
+</div>
 {% endblock %}

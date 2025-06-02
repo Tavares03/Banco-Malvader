@@ -1,10 +1,14 @@
 import pymysql
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def conectar():
     return pymysql.connect(
-        host='localhost',
-        user='root',
-        password='030406',
-        database='banco_malvader',
+        host=os.getenv('DB_HOST'),
+        user=os.getenv('DB_USER'),
+        password=os.getenv('DB_PASSWORD'),
+        database=os.getenv('DB_NAME'),
         cursorclass=pymysql.cursors.DictCursor
     )

@@ -2,7 +2,13 @@
     max-width: 400px;
     margin: 100px auto;
     padding: 30px;
-    background: #ffffff;
+    background: white;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.titulo {
+    color: white;
+    text-align: center;
+    padding-top: 30px;
 }
