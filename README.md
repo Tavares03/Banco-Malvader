@@ -1,5 +1,14 @@
 # Banco-Malvader
-Projeto de um sistema bancário.
+
+Projeto de um sistema bancário desenvolvido em Flask.
+
+## Pré-requisitos
+
+- Python 3.8 ou superior instalado
+- Git instalado (opcional, para clonar o repositório)
+- MySQL ou MariaDB instalado e rodando
+- Variáveis de ambiente configuradas (ver `.env.example` ou instruções
+abaixo)
 
 ## Inicializar o projeto
 
