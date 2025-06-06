@@ -3,16 +3,18 @@
 {% block title %}Verificar OTP{% endblock %}
 
 {% block content %}
+
+<div class="login-container">
 <h3>Digite o código OTP</h3>
-
+</br>
 {% if otp %}
-  <p><strong>Seu código OTP é:</strong> {{ otp }}</p>
+    <p style="text-align:center; color:#666;">Seu código: <strong>{{ otp }}</strong></p>
 {% endif %}
-
 <form method="POST">
     <div class="mb-3">
         <input type="text" name="otp" maxlength="6" class="form-control" placeholder="Ex: 123456" required>
     </div>
   <button type="submit" class="btn btn-primary mt-2">Verificar</button>
 </form>
+</div>
 {% endblock %}
