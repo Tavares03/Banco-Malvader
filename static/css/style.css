@@ -44,3 +44,157 @@ button {
 button:hover {
   background: linear-gradient(to right, #341f97, #5f27cd);
 }
+
+.dashboard {
+  background-color: #0d0d1a;
+  min-height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  align-items: center;         
+  padding: 20px 0 0 0;
+  margin-top: 80px;           
+  gap: 18px;                   
+}
+
+.header {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+
+.saldo-box {
+  background: linear-gradient(to right, #5f27cd, #341f97);
+  border-radius: 10px;
+  padding: 18px 24px;
+  margin: 0 0 10px 0;
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+    .saldo-box h3 {
+      margin: 0 0 10px;
+      color: #fff;
+    }
+
+    .saldo-box .valor {
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+.acoes {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 500px;
+  gap: 12px;
+  margin-bottom: 0;
+}
+
+.acao {
+  background-color: #1e1e2e;
+  padding: 14px 0;
+  border-radius: 10px;
+  width: 48%;
+  min-width: 120px;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+  transition: background 0.2s;
+  margin: 0;
+}
+    .acao:hover {
+      background-color: #2e2e4e;
+    }
+
+.menu-superior {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 60px;
+  background-color: #1a1a2e;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+}
+
+.menu-esquerda {
+  display: flex;
+  align-items: center;
+  min-width: 180px;
+}
+
+.banco-nome {
+  color: #5f27cd;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.menu-centro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex: 1;
+}
+
+.menu-centro a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.menu-centro a:hover {
+  background-color: #2e2e4e;
+  color: #fff;
+}
+
+.menu-direita {
+  display: flex;
+  align-items: center;
+  min-width: 100px;
+  justify-content: flex-end;
+  margin-right: 100px; 
+}
+
+.sair-btn {
+  color: #ff7675;
+  background: none;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.sair-btn:hover {
+  background-color: #2e2e4e;
+  color: #fff;
+}
+
+#titulo-sessao {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #5f27cd;
+  text-shadow: 0 1px 4px #0008;
+}
