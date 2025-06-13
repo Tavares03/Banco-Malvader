@@ -40,3 +40,13 @@ def listar_contas_do_usuario(id_usuario):
             return cursor.fetchall()
     finally:
         conexao.close()
+
+
+def criar_cliente_com_conta(id_usuario):
+    conexao = conectar()
+    try:
+        with conexao.cursor() as cursor:
+            cursor.execute("CALL criar_cliente_e_conta(%s)", (id_usuario,))
+        conexao.commit()
+    finally:
+        conexao.close()

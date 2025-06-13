@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, session
 from dao.usuario_dao import cadastrar_usuario, autenticar_usuario, gerar_otp_usuario, validar_otp
-from dao.cliente_dao import cadastrar_cliente
+from dao.cliente_dao import cadastrar_cliente, criar_cliente_com_conta
 from dao.endereco_dao import cadastrar_endereco
 import re
 
@@ -65,7 +65,7 @@ def salvar_cadastro():
     cadastrar_endereco(id_usuario, cep, lugar, numero_casa, bairro, cidade, estado, complemento)
 
     if tipo_usuario == "CLIENTE":
-        cadastrar_cliente(id_usuario)
+        criar_cliente_com_conta(id_usuario)
     elif tipo_usuario == "FUNCIONARIO":
         pass
 
