@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Gerenciar Contas{% endblock %}
+{% block body_class %}bg-black{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+  <div class="menu-superior">
+    <div class="menu-esquerda">
+      <span class="banco-nome">Banco Malvader</span>
+    </div>
+    <div class="menu-direita">
+      <a href="{{ url_for('funcionario.sair') }}" class="sair-btn">Sair</a>
+    </div>
+  </div>
+  <div class="header" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+    <h2 id="titulo-sessao" style="margin-bottom: 0;">Gerenciar Contas</h2>
+    <span style="color: #aaa; font-size: 1.1rem;">Todas as contas dos clientes</span>
+  </div>
+  <div style="width:100%; max-width:1000px; margin:30px auto;">
+    <table style="width:100%; background:#232336; border-radius:8px;">
+      <thead>
+        <tr style="background:#2e2e4e;">
+          <th style="color:#5f27cd;">Número</th>
+          <th style="color:#5f27cd;">Tipo</th>
+          <th style="color:#5f27cd;">Cliente</th>
+          <th style="color:#5f27cd;">CPF</th>
+          <th style="color:#5f27cd;">Saldo</th>
+          <th style="color:#5f27cd;">Status</th>
+          <th style="color:#5f27cd;">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for conta in contas %}
+        <tr>
+          <td>{{ conta.numero_conta }}</td>
+          <td>{{ conta.tipo_conta.title() }}</td>
+          <td>{{ conta.nome_cliente }}</td>
+          <td>{{ conta.cpf }}</td>
+          <td>
+            R$
+            {% if conta.saldo >= 0 %}
+              <span style="color:#2ecc71;">{{ "{:,.2f}".format(conta.saldo).replace(",", "X").replace(".", ",").replace("X", ".") }}</span>
+            {% else %}
+              <span style="color:#e74c3c;">{{ "{:,.2f}".format(conta.saldo).replace(",", "X").replace(".", ",").replace("X", ".") }}</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if conta.status == 'ATIVA' %}
+              <span style="color:#2ecc71;">Ativa</span>
+            {% elif conta.status == 'ENCERRADA' %}
+              <span style="color:#e74c3c;">Encerrada</span>
+            {% elif conta.status == 'BLOQUEADA' %}
+              <span style="color:#f1c40f;">Bloqueada</span>
+            {% else %}
+              {{ conta.status }}
+            {% endif %}
+          </td>
+          <td>
+            <form method="post" style="display:flex; gap:8px; justify-content:center;">
+                <input type="hidden" name="id_conta" value="{{ conta.id_conta }}">
+                    <button type="submit" name="acao" value="ativar" class="acao" style="background:#2ecc71; color:#fff; width:auto; padding:4px 10px; font-size:0.95rem;">Ativar</button>
+                    <button type="submit" name="acao" value="encerrar" class="acao" style="background:#e74c3c; color:#fff; width:auto; padding:4px 10px; font-size:0.95rem;">Encerrar</button>
+                    <button type="submit" name="acao" value="bloquear" class="acao" style="background:#f1c40f; color:#232336; width:auto; padding:4px 10px; font-size:0.95rem;">Bloquear</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

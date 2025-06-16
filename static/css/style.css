@@ -46,7 +46,7 @@ button:hover {
 }
 
 .dashboard {
-  background-color: #0d0d1a;
+  background-color: #000000;
   min-height: 100vh;
   color: white;
   display: flex;
@@ -171,7 +171,7 @@ button:hover {
   align-items: center;
   min-width: 100px;
   justify-content: flex-end;
-  margin-right: 100px; 
+  margin-right: 80px; 
 }
 
 .sair-btn {
@@ -197,4 +197,274 @@ button:hover {
   margin-bottom: 20px;
   color: #5f27cd;
   text-shadow: 0 1px 4px #0008;
+}
+
+
+.Extrato {
+  text-align: center;
+  padding: 20px 20 px 20px ;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+.Extrato table td, th {
+    padding: 12px 55px; /* aumenta o espaçamento horizontal */
+    text-align: center;
+}
+
+.deposito {
+  text-align: center;
+  width: 400px;
+}
+
+.deposito button {
+  width: 420px;
+}
+
+.pix{
+  text-align: center;
+  width: 400px;
+}
+
+.pix button {
+  width: 420px;
+}
+
+.transferir{
+  text-align: center;
+  width: 350px;
+}
+
+.transferir button{
+  width: 370px;
+}
+
+.bg-black {
+  background-color: #000000 !important;
+  color: #fff;
+}
+
+.formulario_funcionario{
+  background-color: #4221A8;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.extrato-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        margin-top: 80px; /* Espaço para o menu superior fixo */
+    }
+
+    .info-conta {
+        background-color: #1e1e2e; /* Cor de fundo escura, como nas caixas de ação */
+        border-left: 4px solid #5f27cd; /* Destaque com a cor primária */
+        padding: 1.5rem;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 800px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .info-conta p {
+        margin: 0.5rem 0;
+        font-size: 1.1rem;
+        color: #ccc;
+    }
+    .info-conta p strong {
+        color: #fff;
+    }
+
+    .tabela-extrato {
+        width: 100%;
+        max-width: 800px;
+        border-collapse: collapse;
+        background-color: #1e1e2e;
+        border-radius: 10px;
+        overflow: hidden; /* Garante que o border-radius aplique nas bordas da tabela */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    .tabela-extrato th, .tabela-extrato td {
+        padding: 1rem 1.5rem;
+        text-align: left;
+        border-bottom: 1px solid #2e2e4e; /* Linha sutil para separar as transações */
+    }
+
+    .tabela-extrato thead th {
+        background-color: #2e2e4e;
+        color: #ccc;
+        font-weight: 600;
+    }
+    
+    .tabela-extrato tbody tr:last-child td {
+        border-bottom: none; /* Remove a borda da última linha */
+    }
+
+    .valor-entrada {
+        color: #28a745; /* Verde para créditos */
+        font-weight: 600;
+    }
+
+    .valor-saida {
+        color: #ff7675; /* Vermelho/rosa do seu botão "Sair" */
+        font-weight: 600;
+    }
+    
+    .btn-voltar {
+        display: inline-block;
+        margin-top: 2rem;
+        padding: 12px 24px;
+        background-color: #2e2e4e;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: background-color 0.2s;
+    }
+
+    .btn-voltar:hover {
+        background-color: #5f27cd;
+    }
+
+.form-transferencia {
+  background: #181824;
+  border-radius: 10px;
+  padding: 24px;
+  max-width: 400px;
+  margin: 30px auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.form-transferencia label {
+  color: #5f27cd;
+  font-weight: 500;
+}
+
+.form-transferencia input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 16px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #232336;
+  color: #fff;
+}
+
+.form-transferencia input:focus {
+  outline: none;
+  border-color: #5f27cd;
+  background: #232336;
+}
+
+.form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        margin-top: 80px; /* Espaço para o menu superior fixo */
+    }
+    .form-box {
+        background-color: #1e1e2e;
+        padding: 2rem 2.5rem;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 450px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    .form-group label {
+        display: block;
+        color: #ccc;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .limite-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        margin-top: 80px;
+        gap: 1.5rem;
+    }
+    .limite-card {
+        background-color: #1e1e2e;
+        padding: 1.5rem 2rem;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 550px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        border-left: 4px solid #5f27cd;
+    }
+    .limite-card h3 {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        color: #fff;
+        font-size: 1.2rem;
+    }
+    .limite-card p {
+        margin: 0.75rem 0;
+        color: #ccc;
+        font-size: 1.1rem;
+    }
+    .limite-potencial {
+        color: #28a745; /* Verde para destacar o novo limite */
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+    .explicacao {
+        font-size: 0.9rem;
+        color: #888;
+        margin-top: 1rem;
+        text-align: center;
+    }
+    .btn-voltar {
+        display: inline-block; margin-top: 2rem; padding: 12px 24px;
+        background-color: #6c757d; color: white; text-decoration: none;
+        border-radius: 6px; font-weight: 500; transition: background-color 0.2s;
+    }
+    .btn-voltar:hover { background-color: #5a6268; }
+
+    .aviso {
+      background-color: #4d2d2d; 
+      border-left: 4px solid #ff7675;
+      color: #f1f1f1; 
+      padding: 1rem; 
+      border-radius: 5px; 
+      margin-bottom: 2rem; 
+    }
+
+    .aviso p { 
+      margin: 0; 
+    }
+
+    .btn-encerrar { 
+      background: linear-gradient(to right, #c0392b, #e74c3c); 
+    } 
+    /* Botão vermelho para ação destrutiva */
+    .btn-encerrar:hover { 
+      background: linear-gradient(to right, #e74c3c, #c0392b); 
+    }
+
+.movimentacoes-tabela {
+  width: 98%;
+  max-width: 1000px;
+  min-width: 600px;
+  border-collapse: collapse;
+  background-color: #232336;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto;
 }

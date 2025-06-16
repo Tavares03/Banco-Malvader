@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastro de Funcionários{% endblock %}
+{% block body_class %}bg-black{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+  <div class="menu-superior">
+    <div class="menu-esquerda">
+      <span class="banco-nome">Banco Malvader</span>
+    </div>
+    <div class="menu-direita">
+      <a href="{{ url_for('funcionario.sair') }}" class="sair-btn">Sair</a>
+    </div>
+  </div>
+  <div class="header" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+    <h2 id="titulo-sessao" style="margin-bottom: 0;">Cadastro de Funcionário</h2>
+    <span style="color: #aaa; font-size: 1.1rem;">Preencha os dados do novo funcionário</span>
+  </div>
+  {% if mensagem %}
+    <div style="color:#2ecc71; text-align:center; margin-bottom:18px;">{{ mensagem }}</div>
+  {% endif %}
+  <form method="POST" style="background:#181824; border-radius:10px; padding:24px; max-width:600px; margin:30px auto;">
+    <h3 style="color:#5f27cd;">Dados Pessoais</h3>
+    <div class="mb-3">
+      <label>Nome:</label>
+      <input type="text" name="nome" required>
+    </div>
+    <div class="mb-3">
+      <label>CPF:</label>
+      <input type="text" name="cpf" maxlength="11" required>
+    </div>
+    <div class="mb-3">
+      <label>Data de Nascimento:</label>
+      <input type="date" name="nascimento" required>
+    </div>
+    <div class="mb-3">
+      <label>Telefone:</label>
+      <input type="text" name="telefone" maxlength="15" required>
+    </div>
+    <div class="mb-3">
+      <label>Senha:</label>
+      <input type="password" name="senha" required>
+    </div>
+
+    <h3 style="color:#5f27cd;">Endereço</h3>
+    <div class="mb-3">
+      <label>CEP:</label>
+      <input type="text" name="cep" required>
+    </div>
+    <div class="mb-3">
+      <label>Rua:</label>
+      <input type="text" name="lugar" required>
+    </div>
+    <div class="mb-3">
+      <label>Número:</label>
+      <input type="text" name="numero_casa" required>
+    </div>
+    <div class="mb-3">
+      <label>Bairro:</label>
+      <input type="text" name="bairro" required>
+    </div>
+    <div class="mb-3">
+      <label>Cidade:</label>
+      <input type="text" name="cidade" required>
+    </div>
+    <div class="mb-3">
+      <label>Estado:</label>
+      <input type="text" name="estado" maxlength="2" required>
+    </div>
+    <div class="mb-3">
+      <label>Complemento:</label>
+      <input type="text" name="complemento">
+    </div>
+
+    <h3 style="color:#5f27cd;">Cargo</h3>
+    <div class="mb-3">
+      <label>Cargo:</label>
+      <select name="cargo" required>
+        <option value="ESTAGIARIO">Estagiário</option>
+        <option value="ATENDENTE">Atendente</option>
+        <option value="GERENTE">Gerente</option>
+      </select>
+    </div>
+
+    <button type="submit" class="acao" style="width:100%; margin-top: 18px;">Cadastrar Funcionário</button>
+  </form>
+</div>
+{% endblock %}

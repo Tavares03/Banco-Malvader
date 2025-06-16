@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Depositar - Banco Malvader{% endblock %}
+
+{% block body_class %}bg-black{% endblock %}
+
+{% block content %}
+<div class="menu-superior">
+    <div class="menu-esquerda">
+      <span class="banco-nome">Banco Malvader</span>
+    </div>
+    <div class="menu-centro">
+      <a href="{{ url_for('cliente.cliente') }}">Início</a>
+      <a href="{{ url_for('cliente.depositar') }}">Depositar</a>
+      <a href="{{ url_for('cliente.sacar') }}">Sacar</a>
+      <a href="{{ url_for('cliente.perfil') }}">Perfil</a>
+    </div>
+    <div class="menu-direita">
+      <a href="{{ url_for('cliente.sair') }}" class="sair-btn">Sair</a>
+    </div>
+  </div>
+
+
+<div class="form-container">
+    <div class="form-box">
+        <h2 id="titulo-sessao">Realizar Depósito</h2>
+        
+        <form method="POST" action="{{ url_for('cliente.depositar') }}">
+            
+            <div class="form-group">
+                <label for="id_conta">Selecione a Conta para Depositar:</label>
+                <select name="id_conta" id="id_conta" required>
+                    {% for conta in contas %}
+                        <option value="{{ conta.id_conta }}">
+                            {{ conta.tipo_conta.title() }} - Nº {{ conta.numero_conta }} (Saldo: R$ {{ "%.2f"|format(conta.saldo)|replace('.',',') }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="valor">Valor do Depósito (R$):</label>
+                <input type="number" name="valor" id="valor" step="0.01" min="0.01" placeholder="Ex: 50,00" required>
+            </div>
+            
+            <button type="submit">Confirmar Depósito</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

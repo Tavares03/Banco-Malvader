@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Encerrar Conta - Banco Malvader{% endblock %}
+
+{% block body_class %}bg-black{% endblock %}
+
+{% block content %}
+
+<div class="menu-superior">
+    <div class="menu-esquerda">
+      <span class="banco-nome">Banco Malvader</span>
+    </div>
+    <div class="menu-centro">
+      <a href="{{ url_for('cliente.cliente') }}">Início</a>
+      <a href="{{ url_for('cliente.depositar') }}">Depositar</a>
+      <a href="{{ url_for('cliente.sacar') }}">Sacar</a>
+      <a href="{{ url_for('cliente.perfil') }}">Perfil</a>
+    </div>
+    <div class="menu-direita">
+      <a href="{{ url_for('cliente.sair') }}" class="sair-btn">Sair</a>
+    </div>
+  </div>
+
+<div class="form-container">
+    <div class="form-box">
+        <h2 id="titulo-sessao">Encerrar Conta</h2>
+
+        <div class="aviso">
+            <p><strong>Atenção:</strong> Esta ação é irreversível.</p>
+            <p>Para encerrar uma conta, o saldo deve ser exatamente R$ 0,00.</p>
+        </div>
+        
+        <form method="POST" action="{{ url_for('cliente.encerrar_conta_route') }}">
+            <div class="form-group">
+                <label for="numero_conta">Número da Conta:</label>
+                <input type="text" name="numero_conta" id="numero_conta" placeholder="Digite o número da conta" required>
+            </div>
+            <div class="form-group">
+                <label for="cpf">CPF (somente números):</label>
+                <input type="text" name="cpf" id="cpf" placeholder="Digite seu CPF" maxlength="11" required>
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
+            </div>
+            
+            <button type="submit" class="btn-encerrar">Encerrar Conta Permanentemente</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

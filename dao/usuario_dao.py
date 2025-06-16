@@ -65,3 +65,13 @@ def validar_otp(id_usuario, otp_digitado):
 
     finally:
         conexao.close()
+
+def buscar_usuario_por_cpf_ou_telefone(cpf, telefone):
+    conexao = conectar()
+    try:
+        with conexao.cursor() as cursor:
+            sql = "SELECT id_usuario FROM usuario WHERE cpf = %s OR telefone = %s LIMIT 1"
+            cursor.execute(sql, (cpf, telefone))
+            return cursor.fetchone()
+    finally:
+        conexao.close()

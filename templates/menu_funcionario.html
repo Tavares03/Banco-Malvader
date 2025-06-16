@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Menu do Funcionário{% endblock %}
+
+{% block body_class %}bg-black{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+
+  <div class="menu-superior">
+    <div class="menu-esquerda">
+      <span class="banco-nome">Banco Malvader</span>
+    </div>
+    <div class="menu-direita">
+      <a href="{{ url_for('funcionario.sair') }}" class="sair-btn">Sair</a>
+    </div>
+  </div>
+
+  <div class="header" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+    <h3 style="color:#aaa; text-align:center; margin-top: 30px; font-size: 2rem;">Área do Funcionário</h3>
+  </div>
+
+  <div class="acoes" style="margin-top: 30px; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 350px; gap: 18px;">
+    <a href="{{ url_for('funcionario.visualizar_clientes') }}" style="width:100%;"><button class="acao" style="width:100%;">Visualizar Clientes</button></a>
+    <a href="{{ url_for('funcionario.gerenciar_contas') }}" style="width:100%;"><button class="acao" style="width:100%;">Gerenciar Contas</button></a>
+    <a href="{{ url_for('funcionario.relatorios') }}" style="width:100%;"><button class="acao" style="width:100%;">Gerar Relatórios</button></a>
+    <a href="{{ url_for('funcionario.abertura_conta') }}" style="width:100%;"><button class="acao" style="width:100%;">Abertura de Conta</button></a>
+    <a href="{{ url_for('funcionario.alterar_dados') }}" style="width:100%;"><button class="acao" style="width:100%;">Alterar Dados</button></a>
+    <a href="{{ url_for('funcionario.cadastro_funcionarios') }}" style="width:100%;"><button class="acao" style="width:100%;">Cadastro Funcionarios</button></a>
+  </div>
+
+</div>
+{% endblock %}

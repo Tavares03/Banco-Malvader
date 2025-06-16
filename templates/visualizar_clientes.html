@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Visualizar Clientes{% endblock %}
+{% block body_class %}bg-black{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+  <div class="menu-superior">
+    <div class="menu-esquerda">
+      <span class="banco-nome">Banco Malvader</span>
+    </div>
+    <div class="menu-direita">
+      <a href="{{ url_for('funcionario.sair') }}" class="sair-btn">Sair</a>
+    </div>
+  </div>
+  <div class="header" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+    <h2 id="titulo-sessao" style="margin-bottom: 0;">Clientes</h2>
+    <span style="color: #aaa; font-size: 1.1rem;">Veja todos os clientes cadastrados</span>
+  </div>
+  <div style="width:100%; max-width:700px; margin:30px auto;">
+    {% for cliente in clientes %}
+      <div class="cliente-card" style="background:#181824; border-radius:10px; margin-bottom:14px; padding:0;">
+        <div class="cliente-header" style="display:flex; align-items:center; cursor:pointer; padding:18px 24px;" onclick="toggleClienteInfo(this)">
+          <span style="font-size:1.3rem; color:#5f27cd; flex:1;">{{ cliente.nome }}</span>
+          <span class="seta" style="font-size:1.5rem; color:#5f27cd; transition: transform 0.2s;">&#9654;</span>
+        </div>
+        <div class="cliente-info" style="display:none; padding:0 24px 18px 24px;">
+          <p><strong>CPF:</strong> {{ cliente.cpf }}</p>
+          <p><strong>Telefone:</strong> {{ cliente.telefone }}</p>
+          <p><strong>Data de Nascimento:</strong> {{ cliente.data_nascimento.strftime('%d/%m/%Y') if cliente.data_nascimento else '' }}</p>
+          <p><strong>CEP:</strong> {{ cliente.cep or '-' }}</p>
+          <p><strong>Rua:</strong> {{ cliente.lugar or '-' }}</p>
+          <p><strong>Número:</strong> {{ cliente.numero_casa or '-' }}</p>
+          <p><strong>Bairro:</strong> {{ cliente.bairro or '-' }}</p>
+          <p><strong>Cidade:</strong> {{ cliente.cidade or '-' }}</p>
+          <p><strong>Estado:</strong> {{ cliente.estado or '-' }}</p>
+          <p><strong>Complemento:</strong> {{ cliente.complemento or '-' }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+<script>
+function toggleClienteInfo(headerDiv) {
+  const info = headerDiv.parentElement.querySelector('.cliente-info');
+  const seta = headerDiv.querySelector('.seta');
+  if (info.style.display === "none" || info.style.display === "") {
+    info.style.display = "block";
+    seta.style.transform = "rotate(90deg)";
+  } else {
+    info.style.display = "none";
+    seta.style.transform = "rotate(0deg)";
+  }
+}
+</script>
+{% endblock %}

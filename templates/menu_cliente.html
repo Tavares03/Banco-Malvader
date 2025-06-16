@@ -1,55 +1,60 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Banco Malvader</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-  <div class="dashboard">
+{% extends "base.html" %}
 
-    <div class="menu-superior">
-      <div class="menu-esquerda">
-        <span class="banco-nome">Banco Malvader</span>
+{% block title %}Banco Malvader{% endblock %}
+
+{% block body_class %}bg-black{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+
+  <div class="menu-superior">
+    <div class="menu-esquerda">
+      <span class="banco-nome">Banco Malvader</span>
     </div>
     <div class="menu-centro">
-      <a href="/cliente/">Início</a>
-      <a href="#">Pagamentos</a>
-      <a href="#">Cartão</a>
-      <a href="#">Perfil</a>
+      <a href="{{ url_for('cliente.cliente') }}">Início</a>
+      <a href="{{ url_for('cliente.depositar') }}">Depositar</a>
+      <a href="{{ url_for('cliente.sacar') }}">Sacar</a>
+      <a href="{{ url_for('cliente.perfil') }}">Perfil</a>
     </div>
-      <div class="menu-direita">
-        <a href="/logout" class="sair-btn">Sair</a>
-      </div>
+    <div class="menu-direita">
+      <a href="{{ url_for('cliente.sair') }}" class="sair-btn">Sair</a>
     </div>
-
-      <div class="header">
-        <h2 id="titulo-sessao">Olá, {{ session['nome'] }}</h2>
-      </div>
-
-      <div class="saldo-box">
-        <h3>Saldo disponível</h3>
-        <div class="valor">R$ {{ "{:,.2f}".format(saldo).replace(",", "X").replace(".", ",").replace("X", ".") }}</div>
-      </div>
-
-      <h3 style="color:#aaa; margin-top: 30px;">Suas Contas</h3>
-
-  {% for conta in contas %}
-    <div style="background-color:#1e1e2e; padding: 16px; border-radius: 10px; margin: 10px 0;">
-      <p style="margin:0;"><strong>Tipo:</strong> {{ conta.tipo_conta.title() }}</p>
-      <p style="margin:0;"><strong>Nº Conta:</strong> {{ conta.numero_conta }}</p>
-      <p style="margin:0 0 10px;"><strong>Saldo:</strong> R$ {{ "{:,.2f}".format(conta.saldo).replace(",", "X").replace(".", ",").replace("X", ".") }}</p>
-      <a href="/extrato/{{ conta.id_conta }}" style="display:inline-block; padding:8px 12px; background:#5f27cd; color:white; border-radius:6px; text-decoration:none;">Ver Extrato</a>
-    </div>
-  {% endfor %}
-
-      <div class="acoes">
-        <div class="acao">PIX</div>
-        <div class="acao">Transferir</div>
-        <div class="acao">Depositar</div>
-        <div class="acao">Extrato</div>
-      </div>
-
   </div>
-</body>
-</html>
+
+  <div class="header" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+    <h2 id="titulo-sessao" style="margin-bottom: 0;">Olá, {{ session['nome'] }}</h2>
+    <span style="color: #aaa; font-size: 1.1rem;">Bem-vindo ao seu painel</span>
+  </div>
+
+  <div class="saldo-box" style="margin-top: 18px;">
+    <h3 style="color: #fff; margin-bottom: 8px;">Saldo disponível</h3>
+    <div class="valor" style="font-size: 2.2rem; color: #fff; letter-spacing: 1px;">
+      R$ {{ "{:,.2f}".format(saldo).replace(",", "X").replace(".", ",").replace("X", ".") }}
+    </div>
+  </div>
+
+  <h3 style="color:#aaa; margin-top: 30px; margin-bottom: 10px;">Suas Contas</h3>
+
+  <!-- Container flex para as contas -->
+  <div class="contas-flex" style="display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; width: 100%; margin-bottom: 20px;">
+    {% for conta in contas %}
+      <div style="background-color:#1e1e2e; padding: 12px; border-radius: 10px; width: 180px; min-width: 150px; box-shadow: 0 2px 8px #0004; display: flex; flex-direction: column; align-items: center;">
+        <p style="margin:0; font-size: 0.95rem;"><strong>Tipo:</strong> {{ conta.tipo_conta.title() }}</p>
+        <p style="margin:0; font-size: 0.95rem;"><strong>Nº:</strong> {{ conta.numero_conta }}</p>
+        <p style="margin:0 0 10px; font-size: 0.95rem;"><strong>Saldo:</strong> R$ {{ "{:,.2f}".format(conta.saldo).replace(",", "X").replace(".", ",").replace("X", ".") }}</p>
+        <a href="{{ url_for('cliente.extrato_conta', id_conta=conta.id_conta) }}" style="display:inline-block; padding:6px 10px; background:#5f27cd; color:white; border-radius:6px; text-decoration:none; font-size: 0.95rem;">Ver Extrato</a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="acoes" style="flex-direction: column; align-items: center; gap: 18px; margin-top: 30px; max-width: 350px;">
+    <a href="{{ url_for('cliente.transferir') }}" style="width:100%;"><button class="acao" style="width:100%; font-size: 1.1rem;">Transferir</button></a>
+    
+    <a href="{{ url_for('cliente.encerrar_conta_route') }}" style="width:100%;"><button class="acao" style="width:100%; font-size: 1.1rem;">Encerrar Conta</button></a>
+    <a href="{{ url_for('cliente.consultar_limite') }}" style="width:100%;"><button class="acao" style="width:100%; font-size: 1.1rem;">Consultar Limite</button></a>
+    <a href="{{ url_for('cliente.abrir_conta') }}" style="width:100%;"><button class="acao" style="width:100%; font-size: 1.1rem;">Abrir Conta</button></a>
+  </div>
+
+</div>
+{% endblock %}

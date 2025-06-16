@@ -37,4 +37,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+function login(event) {
+  event.preventDefault();
 
+  const usuario = document.getElementById("usuario").value;
+  const senha = document.getElementById("senha").value;
+  const tipo = document.getElementById("tipoUsuario").value;
+
+ 
+  if (usuario && senha) {
+    if (tipo === "funcionario") {
+      window.location.href = "menu_funcionario.html";
+    } else {
+      window.location.href = "menu_cliente.html";
+    }
+  } else {
+    alert("Usuário ou senha inválidos");
+  }
+}

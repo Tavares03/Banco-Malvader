@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Abrir Nova Conta{% endblock %}
+
+{% block body_class %}bg-black{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+
+<div class="menu-superior">
+    <div class="menu-esquerda">
+      <span class="banco-nome">Banco Malvader</span>
+    </div>
+    <div class="menu-centro">
+      <a href="{{ url_for('cliente.cliente') }}">Início</a>
+      <a href="{{ url_for('cliente.depositar') }}">Depositar</a>
+      <a href="{{ url_for('cliente.sacar') }}">Sacar</a>
+      <a href="{{ url_for('cliente.perfil') }}">Perfil</a>
+    </div>
+    <div class="menu-direita">
+      <a href="{{ url_for('cliente.sair') }}" class="sair-btn">Sair</a>
+    </div>
+  </div>
+
+  <div class="header" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+    <h2 id="titulo-sessao" style="margin-bottom: 0;">Abrir Nova Conta</h2>
+    <span style="color: #aaa; font-size: 1.1rem;">Escolha o tipo de conta que deseja abrir</span>
+  </div>
+  <form method="POST" style="background:#181824; border-radius:10px; padding:24px; max-width:400px; margin:30px auto;">
+    <div class="mb-3">
+      <label for="tipo_conta" class="form-label"><strong>Tipo de Conta:</strong></label>
+      <select class="form-select" id="tipo_conta" name="tipo_conta" required>
+        <option value="" selected disabled>Selecione</option>
+        <option value="POUPANCA">Conta Poupança</option>
+        <option value="INVESTIMENTO">Conta Investimento</option>
+      </select>
+    </div>
+    <button type="submit" class="acao" style="width:100%; margin-top: 18px;">Abrir Conta</button>
+  </form>
+</div>
+{% endblock %}

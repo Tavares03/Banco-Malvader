@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Extrato da Conta - Banco Malvader{% endblock %}
+
+{% block body_class %}bg-black{% endblock %}
+
+{% block content %}
+<div class="menu-superior">
+    <div class="menu-esquerda">
+      <span class="banco-nome">Banco Malvader</span>
+    </div>
+    <div class="menu-centro">
+      <a href="{{ url_for('cliente.cliente') }}">Início</a>
+      <a href="{{ url_for('cliente.depositar') }}">Depositar</a>
+      <a href="{{ url_for('cliente.sacar') }}">Sacar</a>
+      <a href="{{ url_for('cliente.perfil') }}">Perfil</a>
+    </div>
+    <div class="menu-direita">
+      <a href="{{ url_for('cliente.sair') }}" class="sair-btn">Sair</a>
+    </div>
+  </div>
+
+<div class="extrato-container">
+
+    <h2 id="titulo-sessao">Extrato da Conta</h2>
+
+    <div class="info-conta">
+        <p><strong>Conta:</strong> {{ conta.numero_conta }}</p>
+        <p><strong>Tipo:</strong> {{ conta.tipo_conta.replace('_', ' ').title() }}</p>
+        <p><strong>Saldo Atual: R$ {{ "%.2f" | format(conta.saldo) | replace('.', ',') }}</strong></p>
+    </div>
+
+    <table class="tabela-extrato">
+        <thead>
+            <tr>
+                <th>Data e Hora</th>
+                <th>Tipo</th>
+                <th>Descrição</th>
+                <th>Valor (R$)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in transacoes %}
+                <tr>
+                    <td>{{ t.data_hora.strftime('%d/%m/%Y %H:%M') }}</td>
+                    <td>{{ t.tipo_transacao.replace('_', ' ').title() }}</td>
+                    <td>{{ t.descricao or '---' }}</td>
+                    
+                    {% if t.movimento == 'SAIDA' %}
+                        <td class="valor-saida">- {{ "%.2f" | format(t.valor) | replace('.', ',') }}</td>
+                    {% elif t.movimento == 'ENTRADA' %}
+                        <td class="valor-entrada">+ {{ "%.2f" | format(t.valor) | replace('.', ',') }}</td>
+                    {% else %}
+                        <td>{{ "%.2f" | format(t.valor) | replace('.', ',') }}</td>
+                    {% endif %}
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" style="text-align:center; padding: 2rem;">Nenhuma transação foi encontrada para esta conta.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('cliente.cliente') }}" class="btn-voltar">Voltar ao Painel</a>
+
+</div>
+{% endblock %}

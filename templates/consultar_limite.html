@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Consulta de Limite - Banco Malvader{% endblock %}
+
+{% block body_class %}bg-black{% endblock %}
+
+{% block content %}
+<div class="menu-superior">
+    <div class="menu-esquerda">
+      <span class="banco-nome">Banco Malvader</span>
+    </div>
+    <div class="menu-centro">
+      <a href="{{ url_for('cliente.cliente') }}">Início</a>
+      <a href="{{ url_for('cliente.depositar') }}">Depositar</a>
+      <a href="{{ url_for('cliente.sacar') }}">Sacar</a>
+      <a href="{{ url_for('cliente.perfil') }}">Perfil</a>
+    </div>
+    <div class="menu-direita">
+      <a href="{{ url_for('cliente.sair') }}" class="sair-btn">Sair</a>
+    </div>
+  </div>
+
+<div class="limite-container">
+    <h2 id="titulo-sessao">Consulta de Limite de Crédito</h2>
+
+    {% for info in info_limites %}
+        <div class="limite-card">
+            <h3>Conta Corrente Nº: {{ info.numero_conta }}</h3>
+            <p>Seu Score de Crédito atual é: <strong>{{ "%.2f"|format(info.score_credito) }}</strong></p>
+            <p>Seu Limite de Crédito atual é: <strong>R$ {{ "%.2f"|format(info.limite_atual)|replace('.',',') }}</strong></p>
+            <p class="limite-potencial">
+                Com base no seu score, seu limite pode chegar a: R$ {{ "%.2f"|format(info.limite_potencial)|replace('.',',') }}
+            </p>
+            <p class="explicacao">
+                O limite potencial é calculado com uma base de R$ 200 mais um bônus de R$ 10 para cada ponto do seu score.
+            </p>
+        </div>
+    {% else %}
+        <div class="limite-card">
+            <p>Você não possui contas correntes ativas para consultar o limite.</p>
+        </div>
+    {% endfor %}
+
+    <a href="{{ url_for('cliente.cliente') }}" class="btn-voltar">Voltar ao Painel</a>
+</div>
+
+{% endblock %}

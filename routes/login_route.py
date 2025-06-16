@@ -1,8 +1,9 @@
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, session, url_for
 from dao.usuario_dao import cadastrar_usuario, autenticar_usuario, gerar_otp_usuario, validar_otp
 from dao.cliente_dao import cadastrar_cliente, criar_cliente_com_conta
 from dao.endereco_dao import cadastrar_endereco
-import re
+from dao.funcionario_dao import criar_funcionario_padrao
+import re, random
 
 login_route = Blueprint('login', __name__)
 
@@ -60,14 +61,16 @@ def salvar_cadastro():
     if not padrao_senha_forte.match(senha):
         return "Erro: A senha deve conter no mínimo 8 caracteres, com letras maiúsculas, minúsculas, números e símbolos."
 
+    # Cadastra usuário e endereço
     id_usuario = cadastrar_usuario(nome, cpf, nascimento, telefone, senha, tipo_usuario)
-
     cadastrar_endereco(id_usuario, cep, lugar, numero_casa, bairro, cidade, estado, complemento)
 
     if tipo_usuario == "CLIENTE":
         criar_cliente_com_conta(id_usuario)
     elif tipo_usuario == "FUNCIONARIO":
-        pass
+    # Gerar um código aleatório para o funcionário
+        codigo_funcionario = f"FUNC{random.randint(1000, 9999)}"
+        criar_funcionario_padrao(id_usuario, codigo_funcionario)
 
     return redirect("/")
 
@@ -80,9 +83,9 @@ def verificar_otp():
         if validar_otp(id_usuario, otp_digitado):
             tipo = session.get("tipo_usuario")
             if tipo == "CLIENTE":
-                return redirect("/cliente")
+                return redirect(url_for("cliente.cliente"))
             else:
-                return redirect("/funcionario")
+                return redirect(url_for("funcionario.funcionario"))
         else:
             return "OTP inválido ou expirado"
 

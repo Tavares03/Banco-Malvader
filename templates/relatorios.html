@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}Relatórios do Banco{% endblock %}
+{% block body_class %}bg-black{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+  <div class="menu-superior">
+    <div class="menu-esquerda">
+      <span class="banco-nome">Banco Malvader</span>
+    </div>
+    <div class="menu-direita">
+      <a href="{{ url_for('funcionario.sair') }}" class="sair-btn">Sair</a>
+    </div>
+  </div>
+  <div class="header" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+    <h2 id="titulo-sessao" style="margin-bottom: 0;">Relatórios Gerais</h2>
+    <span style="color: #aaa; font-size: 1.1rem;">Resumo do banco e relatórios específicos</span>
+  </div>
+
+  <div style="background:#181824; border-radius:10px; padding:24px; width:100%; max-width:700px; margin:24px auto 0 auto;">
+    <h3 style="color:#5f27cd;">Resumo Geral</h3>
+    <ul style="font-size:1.1rem; color:#fff;">
+      <li><strong>Total de Clientes:</strong> {{ resumo.total_clientes }}</li>
+      <li><strong>Total de Funcionários:</strong> {{ resumo.total_funcionarios }}</li>
+      <li><strong>Total de Contas:</strong> {{ resumo.total_contas }}</li>
+      <li><strong>Valor Total em Contas:</strong> R$ {{ "{:,.2f}".format(resumo.saldo_total|float).replace(",", "X").replace(".", ",").replace("X", ".") }}</li>
+    </ul>
+  </div>
+
+  <div style="background:#181824; border-radius:10px; padding:24px; width:100%; max-width:1100px; margin:24px auto 0 auto; display: flex; flex-direction: column; align-items: center;">
+    <h3 style="color:#5f27cd;">Últimas 10 Movimentações</h3>
+    <div class="movimentacoes-tabela-wrapper" style="width:100%; display:flex; justify-content:center;">
+      <table class="movimentacoes-tabela">
+        <thead>
+          <tr>
+            <th>Data/Hora</th>
+            <th>Tipo</th>
+            <th>Valor</th>
+            <th>Conta Origem</th>
+            <th>Conta Destino</th>
+            <th>Descrição</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for mov in ultimas %}
+          <tr>
+            <td style="text-align:center;">{{ mov.data_hora.strftime('%d/%m/%Y %H:%M') if mov.data_hora else '' }}</td>
+            <td style="text-align:center;">{{ mov.tipo_transacao }}</td>
+            <td style="text-align:center;">
+              R$ {{ "{:,.2f}".format(mov.valor|float).replace(",", "X").replace(".", ",").replace("X", ".") }}
+            </td>
+            <td style="text-align:center;">{{ mov.conta_origem or '-' }}</td>
+            <td style="text-align:center;">{{ mov.conta_destino or '-' }}</td>
+            <td style="text-align:center;">{{ mov.descricao or '-' }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="6" style="text-align:center; color:#aaa;">Nenhuma movimentação encontrada.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="background:#181824; border-radius:10px; padding:24px; width:100%; max-width:900px; margin:24px auto 0 auto;">
+    <h3 style="color:#5f27cd;">Clientes com Saldo Negativo</h3>
+    <table style="width:100%; color:#fff; background:#232336; border-radius:8px; margin-top:10px;">
+      <thead>
+        <tr style="background:#2e2e4e;">
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Nº Conta</th>
+          <th>Saldo</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cli in negativos %}
+        <tr>
+          <td>{{ cli.nome }}</td>
+          <td>{{ cli.cpf }}</td>
+          <td>{{ cli.numero_conta }}</td>
+          <td style="color:#e74c3c;">
+            R$ {{ "{:,.2f}".format(cli.saldo|float).replace(",", "X").replace(".", ",").replace("X", ".") }}
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="4" style="text-align:center; color:#aaa;">Nenhum cliente com saldo negativo.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div style="background:#181824; border-radius:10px; padding:24px; width:100%; max-width:900px; margin:24px auto 40px auto;">
+    <h3 style="color:#5f27cd;">Clientes com Limite Excedido</h3>
+    <table style="width:100%; color:#fff; background:#232336; border-radius:8px; margin-top:10px;">
+      <thead>
+        <tr style="background:#2e2e4e;">
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Nº Conta</th>
+          <th>Saldo</th>
+          <th>Limite</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cli in excedidos %}
+        <tr>
+          <td>{{ cli.nome }}</td>
+          <td>{{ cli.cpf }}</td>
+          <td>{{ cli.numero_conta }}</td>
+          <td style="color:#e74c3c;">
+            R$ {{ "{:,.2f}".format(cli.saldo|float).replace(",", "X").replace(".", ",").replace("X", ".") }}
+          </td>
+          <td>
+            R$ {{ "{:,.2f}".format(cli.limite|float).replace(",", "X").replace(".", ",").replace("X", ".") }}
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="5" style="text-align:center; color:#aaa;">Nenhum cliente com limite excedido.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

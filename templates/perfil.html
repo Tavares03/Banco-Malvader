@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Perfil do Cliente{% endblock %}
+
+{% block body_class %}bg-black{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+
+<div class="menu-superior">
+    <div class="menu-esquerda">
+      <span class="banco-nome">Banco Malvader</span>
+    </div>
+    <div class="menu-centro">
+      <a href="{{ url_for('cliente.cliente') }}">Início</a>
+      <a href="{{ url_for('cliente.depositar') }}">Depositar</a>
+      <a href="{{ url_for('cliente.sacar') }}">Sacar</a>
+      <a href="{{ url_for('cliente.perfil') }}">Perfil</a>
+    </div>
+    <div class="menu-direita">
+      <a href="{{ url_for('cliente.sair') }}" class="sair-btn">Sair</a>
+    </div>
+  </div>
+
+  <div class="header" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+    <h2 id="titulo-sessao" style="margin-bottom: 0;">Perfil do Cliente</h2>
+    <span style="color: #aaa; font-size: 1.1rem;">Veja seus dados cadastrados</span>
+  </div>
+  <div style="background:#181824; border-radius:10px; padding:24px; max-width:400px; margin:30px auto;">
+    <h3 style="color:#5f27cd;">Dados Pessoais</h3>
+    <p><strong>Nome:</strong> {{ cliente.nome }}</p>
+    <p><strong>CPF:</strong> {{ cliente.cpf }}</p>
+    <p><strong>Data de Nascimento:</strong> {{ cliente.data_nascimento.strftime('%d/%m/%Y') if cliente.data_nascimento else '' }}</p>
+    <p><strong>Telefone:</strong> {{ cliente.telefone }}</p>
+    <p><strong>Tipo de Usuário:</strong> {{ cliente.tipo_usuario }}</p>
+    <p><strong>Score de Crédito:</strong> {{ cliente.score_credito }}</p>
+    <hr style="border-color:#333;">
+    <h3 style="color:#5f27cd;">Endereço</h3>
+    <p><strong>CEP:</strong> {{ cliente.cep }}</p>
+    <p><strong>Rua:</strong> {{ cliente.lugar }}</p>
+    <p><strong>Número:</strong> {{ cliente.numero_casa }}</p>
+    <p><strong>Bairro:</strong> {{ cliente.bairro }}</p>
+    <p><strong>Cidade:</strong> {{ cliente.cidade }}</p>
+    <p><strong>Estado:</strong> {{ cliente.estado }}</p>
+    <p><strong>Complemento:</strong> {{ cliente.complemento }}</p>
+  </div>
+</div>
+{% endblock %}
